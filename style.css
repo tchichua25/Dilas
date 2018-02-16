@@ -31,7 +31,8 @@ body {
   font-weight: 600;
   max-width: 28em;
   padding: 1em;
-  margin: auto; 
+     width:auto;
+     margin:0 auto;
 }
 ::selection{
   background: #1B3277
