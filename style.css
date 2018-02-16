@@ -29,7 +29,7 @@ body {
   font-weight: 600;
   max-width: 28em;
   padding: 1em;
-  margin: auto; 
+  margin: middle; 
 }
 ::selection{
   background: #1B3277
