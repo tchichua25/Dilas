@@ -15,14 +15,27 @@
 (function(e){"use strict";e.fn.textTyper=function(t){var n={typingClass:"typing",beforeAnimation:function(){},afterAnimation:function(){},speed:10,nextLineDelay:400,startsFrom:0,repeatAnimation:false,repeatDelay:4e3,repeatTimes:1,cursorHtml:'<span class="cursor">|</span>'},r=e.extend({},n,t);this.each(function(){var t=e(this),n=1,i="typingCursor";var s=t,o=s.length,u=[];while(o--){u[o]=e.trim(e(s[o]).html());e(s[o]).html("")}t.init=function(e){var n=r.beforeAnimation;if(n)n();t.animate(0)};t.animate=function(o){var a=s[o],f=r.typingClass,l=r.startsFrom;e(a).addClass(f);var c=setInterval(function(){var f=r.cursorHtml;f=e("<div>").append(e(f).addClass(i)).html();e(a).html(u[o].substr(0,l)+f);l++;if(u[o].length<l){clearInterval(c);o++;if(s[o]){setTimeout(function(){e(a).html(u[o-1]);t.animate(o)},r.nextLineDelay)}else{e(a).find("."+i).remove();if(r.repeatAnimation&&(r.repeatTimes==0||n<r.repeatTimes)){setTimeout(function(){t.animate(0);n++},r.repeatDelay)}else{var h=r.afterAnimation;if(h)h()}}}},r.speed)};t.init()});return this}})(jQuery)
 var typer = new Audio('type.mp3');
 var music = new Audio('music.mp3');
-typer.loop = true;
+var tripmsc = new Audio('bad trip.mp3');
+var talgamsc = new Audio('talga.mp3');
+if (typeof music.loop == 'boolean')
+{
+    music.loop = true;
+    typer.loop = true;
+}
+else
+{
+    music.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+}
+story.style.display = "none";
 // Let's do it!!
 $(document).ready(function() {
-  new Audio('music.mp3').play();
-  new Audio('type.mp3').play();
+  music.play();
+  typer.play();
   var space = document.getElementById("space");
-  $('.command').hide();
-  //('#typer').get(0).play();
+  $('.command').hide(); 
   space.style.display = "block";
   $('input[type="text"]').focus();
   $('#loading').addClass('open');
@@ -46,16 +59,17 @@ $('section').each( function(i,e) {
 var logo1 = document.getElementById("logo");
 var logo2 = document.getElementById("logoC");
 var img1 = document.getElementById("port");
-
+var story = document.getElementById("story");
 
 // Command Input------------------------------
 
   $('input[type="text"]').keyup(function(e){
 
     if(e.which == 13){// ENTER key pressed
-          img1.style.display = "none";
-     space.style.display = "none";
-      $('#player').get(0).pause();
+      talga.pause();
+      tripmsc.pause();
+      img1.style.display = "none";
+      space.style.display = "none";
       $('.command').hide();
       var destination = $('input[type="text"]').val();
       if (destination == "launch"){
@@ -67,6 +81,16 @@ var img1 = document.getElementById("port");
       else if (destination == "dila"){
       img1.style.display = "block";
       }
+      else if (destination == "amanogawa"){
+      story.style.display = "block";
+      music.pause();
+      tripmsc.play();
+      }
+      else if (destination == "talga"){
+      space.style.display = "block";
+      talga.play();
+      }
+      
       // Display section with id == destination and hide all others
       $('section[id="' + destination + '"]').addClass('open').siblings().removeClass('open');
 
@@ -99,5 +123,6 @@ var img1 = document.getElementById("port");
 
 
 // End Command Input-----------------------------
+
 
 });
