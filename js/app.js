@@ -90,8 +90,8 @@ var story = document.getElementById("story");
       tripmsc.play();
       }
       else if (destination == "talga"){    
-      music.pause();
       space.style.display = "block";
+      music.pause();
       talgamsc.play();
       }
       else if (destination == "peace"){     
