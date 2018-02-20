@@ -89,7 +89,8 @@ var story = document.getElementById("story");
       music.pause();
       tripmsc.play();
       }
-      else if (destination == "talga"){
+      else if (destination == "talga"){    
+      music.pause();
       space.style.display = "block";
       talgamsc.play();
       }
